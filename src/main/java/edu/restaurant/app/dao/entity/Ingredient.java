@@ -1,9 +1,6 @@
 package edu.restaurant.app.dao.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -18,6 +15,9 @@ import static edu.restaurant.app.dao.entity.StockMovementType.OUT;
 @NoArgsConstructor
 @Builder
 @Data
+@EqualsAndHashCode
+@ToString
+
 public class Ingredient {
     private Long id;
     private String name;
@@ -61,7 +61,7 @@ public class Ingredient {
                         stockMovement.getCreationDatetime().isBefore(datetime)
                                 || stockMovement.getCreationDatetime().equals(datetime))
                 .toList();
-        double quantity = 0;
+        double quantity = 0.0;
         for (StockMovement stockMovement : stockMovementsBeforeToday) {
             if (IN.equals(stockMovement.getMovementType())) {
                 quantity += stockMovement.getQuantity();

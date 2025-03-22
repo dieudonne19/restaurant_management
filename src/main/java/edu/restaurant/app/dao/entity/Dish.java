@@ -1,9 +1,6 @@
 package edu.restaurant.app.dao.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -14,6 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Data
+@EqualsAndHashCode
+@ToString
 public class Dish {
     private Long id;
     private String name;
@@ -41,7 +40,9 @@ public class Dish {
     public Double getTotalIngredientsCostAt(LocalDate dateValue) {
         double cost = 0.0;
         for (DishIngredient dishIngredient : dishIngredients) {
-            cost += dishIngredient.getIngredient().getPriceAt(dateValue);
+            Double actualPrice = dishIngredient.getIngredient().getPriceAt(dateValue);
+            Double requiredQuantity = dishIngredient.getRequiredQuantity();
+            cost += actualPrice * requiredQuantity;
         }
         return cost;
     }

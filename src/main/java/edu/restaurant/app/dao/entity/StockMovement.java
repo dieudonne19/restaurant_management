@@ -1,9 +1,6 @@
 package edu.restaurant.app.dao.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.Instant;
 
@@ -11,6 +8,8 @@ import java.time.Instant;
 @NoArgsConstructor
 @Builder
 @Data
+@EqualsAndHashCode
+@ToString
 public class StockMovement {
     private Long id;
     private Ingredient ingredient;
